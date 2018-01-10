@@ -1,0 +1,4 @@
+log_example.txt
+sshd[20329]
+sshd[20331]
+sshd[20334]
