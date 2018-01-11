@@ -7,7 +7,7 @@ log_lines = open(input_file_path, "r").readlines()
 
 output_list = []
 for line in log_lines:
-    if "" in line:
+    if " knight sshd[" in line:
         x = line
         x = x.split(" knight ")[1].split(": ")[0]
         output_list.append(x)

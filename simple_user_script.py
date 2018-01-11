@@ -1,6 +1,5 @@
 import os
-import experimental
-import utils
+from coder import experimental, utils
 
 all_lines = open(r".\simple_user_input.txt", "r").read().split("\n")
 log_file_path = all_lines[0]
