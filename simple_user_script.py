@@ -1,7 +1,7 @@
 import os
 from coder import experimental, utils
 
-all_lines = open(r".\simple_user_input.txt", "r").read().split("\n")
+all_lines = open(r"./simple_user_input.txt", "r").read().split("\n")
 log_file_path = all_lines[0]
 output_strings_list = [output_string for output_string in all_lines[1:] if output_string != ""]
 
@@ -11,4 +11,4 @@ output_list, program_str = experimental.get_info_from_log(log_lines, output_stri
 
 utils.create_script(program_str)
 
-os.system('.\machine_induced_script.py .\{} .\log_output_example.txt'.format(log_file_path))
+os.system('python ./machine_induced_script.py ./{} ./log_output_example.txt'.format(log_file_path))

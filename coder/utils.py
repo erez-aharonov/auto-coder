@@ -1,6 +1,7 @@
 import pandas as pd
 
-def create_script(func_str, output_script_file_path=r".\machine_induced_script.py"):
+
+def create_script(func_str, output_script_file_path=r"./machine_induced_script.py"):
     output_script = \
 """import sys
 
