@@ -6,7 +6,14 @@ def get_mapping_function(input_output_data_frame):
     prefix_list, suffix_list = _create_lists_of_prefix_and_suffix(input_output_data_frame)
     common_prefix = utils.get_max_length_common_string_of_list(prefix_list)
     common_suffix = utils.get_max_length_common_string_of_list(suffix_list)
-    func_str = "x = x.split(\"{}\")[1].split(\"{}\")[0]".format(common_prefix, common_suffix)
+    if common_prefix and common_suffix:
+        func_str = "x = x.split(\"{}\")[1].split(\"{}\")[0]".format(common_prefix, common_suffix)
+    elif common_prefix:
+        func_str = "x = x.split(\"{}\")[1]".format(common_prefix)
+    elif common_suffix:
+        func_str = "x = x.split(\"{}\")[0]".format(common_suffix)
+    else:
+        func_str = "x = x"
     _test_func_str_for_correct_mapping(func_str, input_output_data_frame)
     return func_str
 
@@ -51,8 +58,8 @@ def get_info_from_log(log_lines, output_strings_list):
 
     common_string = utils.get_max_length_common_string_of_list(interesting_lines)
 
-    common_string_no_numeric_trail = \
-        common_string[:(-pd.Series(list(common_string)).str.isnumeric().values[::-1].argmin())]
+    # common_string_no_numeric_trail = \
+    #     common_string[:(-pd.Series(list(common_string)).str.isnumeric().values[::-1].argmin())]
 
     input_output_data_frame = pd.DataFrame(interesting_input_output_list, columns=["input", "output"])
 
@@ -64,8 +71,9 @@ for line in log_lines:
     if \"{}\" in line:
         x = line
         {}
+        x = x.replace(\"\\n\", \"\")
         output_list.append(x)
-""".format(common_string_no_numeric_trail, func_str)
+""".format(common_string, func_str)
 
     output_list = apply_func_on_log_lines(log_lines, program_str)
 

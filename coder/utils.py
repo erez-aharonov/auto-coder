@@ -36,5 +36,8 @@ def get_max_length_common_string(string_1, string_2):
 def get_max_length_common_string_of_list(string_list):
     list_of_sub_string_lists = [get_all_substrings(line) for line in string_list]
     list_of_intersections = list(get_intersection_of_list_of_sets(list_of_sub_string_lists))
-    common_string = list_of_intersections[pd.Series(list(list_of_intersections)).apply(len).argmax()]
+    if list_of_intersections:
+        common_string = list_of_intersections[pd.Series(list(list_of_intersections)).apply(len).argmax()]
+    else:
+        common_string = ""
     return common_string
